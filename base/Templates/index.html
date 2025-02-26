@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    * {
+      font-family: "Trirong", serif;
+    }
+    </style>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">My Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#certification">Certification</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#journal">Daily learning Journal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+       
+    <br>
+    <h1 style="text-align: center;"class="display-2">Hi, I'm <span class="text-primary display-1">Soeun Sovannarith</span></h1>
+    <h3 style="text-align: center;" class="display-4"><i>Web Developer</i></h3>
+    <section class="hero text-center text-white d-flex align-items-center justify-content-center">
+       
+        <div>
+            
+            
+            <!-- Add your picture here -->
+            <img style="width:200px" src="{%static 'img/me.JPG'%}" alt="Soeun Sovannarith" class="profile-picture">
+            
+            <br>
+            <button id="hireMeButton" class="btn btn-primary mt-3">Hire Me</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container py-5">
+        <h2 class="text-center">About Me</h2>
+        <p class="text-center">I am a passionate web developer with experience in modern web technologies.</p>
+    </section>
+</div>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="container py-5">
+        <h2 class="text-center">Skills</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p>HTML</p>
+                <div class="progress"><div class="progress-bar" style="width: 90%"></div><p>90%</p></div>
+                <p>CSS</p>
+                <div class="progress"><div class="progress-bar" style="width: 80%"></div></div>
+            </div>
+            <div class="col-md-6">
+                <p>JavaScript</p>
+                <div class="progress"><div class="progress-bar" style="width: 70%"></div></div>
+                <p>Python</p>
+                <div class="progress"><div class="progress-bar" style="width: 60%"></div></div>
+            </div>
+        </div>
+    </section>
+   
+    <section id="certification" class="container py-5">
+        <h2 class="text-center">Certification</h2>
+        
+        <div class="row">
+            {% for c in certification_data %}
+            <div class="col-md-4">
+                
+                <div class="card" >
+                    <div class="card-body text-center">
+                        
+                        <h5 class="card-title">{{ c.Course_name }}</h5>
+                        <img style="width: 100px"src="{{ c.Certi_image }}" alt="Certification Image">
+                        <p class="card-text">{{ c.description }}</p>
+                        <a href="{{ c.link }}" class="btn btn-dark">View</a> 
+                    </div>
+                </div>
+                
+            </div>
+            {% endfor %}
+            
+        </div>
+       
+    </section>
+
+    
+
+
+   
+    {% load static %}   
+    <!-- Projects Section -->
+    <section id="projects" class="container py-5">
+        <h2 class="text-center">Projects</h2>
+        <div class="row">
+            {% for p in project_data %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ p.Project_name }}</h5>
+                        <img style="width:300px" src="{{ p.project_image }}" class="img-fluid" alt="Project Image">
+                        <p class="card-text">{{ p.description }}</p>
+                        <a href="{{ p.link }}" class="btn btn-dark">View Project</a>
+                        <br><br><a href="{{ p.git_repo }}">
+                            <img style="width:30px"src="{%static 'img/git.JPG'%}" alt="GitHub">
+                        <br>GitHub repository</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+   
+    <section  id="journal"class="container py-5">
+        <h2 class="text-center">My daily journal of what I've learned everyday</h2>
+        <div class="row">
+            <!-- Journal Entry 1 -->
+             {% for j in journal_data%}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{j.title}}</h5>
+                        <p class="card-text">
+                            {{j.descrption}}
+                        </p>
+                        <small class="text-muted">{{j.date}}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+    </section>
+    <section id="contact" class="container py-5">
+        <h2 class="text-center">Contact Me</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name= "username"class="form-control" placeholder="Your Name">
+            <input type="email" name= "email" class="form-control my-3" placeholder="Your Email">
+            <textarea class="form-control" name="message" placeholder="Your Message (255 word limit)"></textarea>
+            <button class="btn btn-primary mt-3">Send</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 bg-dark text-white">&copy; 2025 Soeun Sovannairth</footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<script>
+    // Add smooth scrolling to the #contact section when the button is clicked
+    document.getElementById("hireMeButton").addEventListener("click", function () {
+        document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+    });
+     // Scroll to the top of the page on page load
+     window.onload = function () {
+            window.scrollTo({ top: 1, behavior: "smooth" });
+        };
+
+        // Function to handle smooth scrolling and remove the fragment identifier
+        // function handleScrollToSection(event) {
+        //     // Prevent the default anchor behavior
+        //     event.preventDefault();
+
+        //     // Get the target section ID from the href attribute
+        //     const targetId = this.getAttribute("href").substring(1); // Remove the "#"
+        //     const targetSection = document.getElementById(targetId);
+
+        //     if (targetSection) {
+        //         // Scroll to the target section smoothly
+        //         targetSection.scrollIntoView({ behavior: "smooth" });
+
+        //         // Remove the fragment identifier from the URL
+        //         history.replaceState(null, null, " ");
+        //     }
+        // }
+
+        // Attach the event listener to all anchor links with href starting with "#"
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", handleScrollToSection);
+        });
+</script>
