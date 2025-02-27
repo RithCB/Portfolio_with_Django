@@ -30,8 +30,8 @@ SECRET_KEY = 'django-insecure-c13kj!_7eb^4688@8gp9u@@pgb)^svq^rvwws-8y$7x2jhoaaw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://rith-portfoliowithdjango-production.up.railway.app','localhost','127.0.0.1']
-CSRF_TRUSTED_ORIGINS =['https://rith-portfoliowithdjango-production.up.railway.app']
+ALLOWED_HOSTS = ['rith-portfolio-django.up.railway.app','localhost','127.0.0.1']
+CSRF_TRUSTED_ORIGINS =['https://rith-portfolio-django.up.railway.app']
 
 
 # Application definition
