@@ -121,7 +121,7 @@
                         <p class="card-text">{{ p.description }}</p>
                         <a href="{{ p.link }}" class="btn btn-dark">View Project</a>
                         <br><br><a href="{{ p.git_repo }}">
-                            <img style="width:30px"src="{%static 'img/git.JPG'%}" alt="GitHub">
+                            <img style="width:50px"src="{%static 'img/Git.png'%}" alt="GitHub">
                         <br>GitHub repository</a>
                     </div>
                 </div>
@@ -154,17 +154,36 @@
     <section id="contact" class="container py-5">
         <h2 class="text-center">Contact Me</h2>
         
-        <form method="post">
+        <form method="post" id="contactForm">
             {% csrf_token %}
             <input type="text" name= "username"class="form-control" placeholder="Your Name">
             <input type="email" name= "email" class="form-control my-3" placeholder="Your Email">
-            <textarea class="form-control" name="message" placeholder="Your Message (255 word limit)"></textarea>
-            <button class="btn btn-primary mt-3">Send</button>
+            <textarea class="form-control" name="message" placeholder="Your Message (255 words limit)"></textarea>
+            <button class="btn btn-primary mt-3" >Send</button>
         </form>
-    </section>
+        {% comment %} {% if email_send %}
+            <script> alert("Mesage sucessfully sent"); </script>
 
+        
+        {% else %}
+             <script> alert("Mesage fail"); </script>
+        {% endif%} {% endcomment %}
+    </section>
+    {% load static %}
     <!-- Footer -->
-    <footer class="text-center py-3 bg-dark text-white">&copy; 2025 Soeun Sovannairth</footer>
+   
+    <footer class="text-center py-3 bg-dark text-white">
+    <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+      <a href="https://github.com/RithCB"><img src="{%static 'img/github_footer.png'%}" style="width:35px"></a>
+      <a href="https://web.facebook.com/seoun.sovan.narith/"><img src="{%static 'img/facebook.png'%}" style="width:40px"></a>
+      <a href="https://www.linkedin.com/in/soeun-sovannarith-116958291"><img src="{%static 'img/linkedin.png'%}" style="width:55px"></a>
+      <a href="https://t.me/S_Sovanarith"><img src="{%static 'img/Telegram.png'%}" style="width:35px"></a>
+      </div>
+    &copy; 2025 Soeun Sovannairth
+       
+    
+    </footer>
+    
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
@@ -179,23 +198,16 @@
             window.scrollTo({ top: 1, behavior: "smooth" });
         };
 
-        // Function to handle smooth scrolling and remove the fragment identifier
-        // function handleScrollToSection(event) {
-        //     // Prevent the default anchor behavior
-        //     event.preventDefault();
-
-        //     // Get the target section ID from the href attribute
-        //     const targetId = this.getAttribute("href").substring(1); // Remove the "#"
-        //     const targetSection = document.getElementById(targetId);
-
-        //     if (targetSection) {
-        //         // Scroll to the target section smoothly
-        //         targetSection.scrollIntoView({ behavior: "smooth" });
-
-        //         // Remove the fragment identifier from the URL
-        //         history.replaceState(null, null, " ");
-        //     }
-        // }
+        {% if messages %}
+   
+        window.onload = function() {
+            {% for message in messages %}
+                alert("{{ message }}");  // Show success alert
+            {% endfor %}
+            document.getElementById("contactForm").reset();  // Reset form fields
+        };
+    
+        {% endif %}
 
         // Attach the event listener to all anchor links with href starting with "#"
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
