@@ -133,14 +133,14 @@
     <!-- Contact Section -->
    
     <section id="journal" class="container py-5">
-    <h2 class="text-center">My daily journal of what I've learned every day</h2>
+    <h2 class="text-center">My daily journal of what I've learned everyday</h2>
     <div class="row">
         {% for j in journal_data %}
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">{{ j.title }}</h5>
-                    <p class="card-text">
+            <div class="card h-100 d-flex flex-column">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-truncate">{{ j.title }}</h5>
+                    <p class="card-text flex-grow-1">
                         {{ j.description }}
                     </p>
                     <small class="text-muted">{{ j.date }}</small>
@@ -150,6 +150,7 @@
         {% endfor %}
     </div>
 </section>
+
 
     <section id="contact" class="container py-5">
         <h2 class="text-center">Contact Me</h2>
